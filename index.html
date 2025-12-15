@@ -19,16 +19,13 @@
             --color-surface: #FFFFFF;
             --color-text: #2B225A;
             --color-text-secondary: #5a5f7d;
-            /* Ajustado levemente para o tom roxo/cinza */
 
             /* Variações calculadas baseadas no #505DA8 */
             --color-primary-hover: #404a8f;
             --color-primary-active: #303875;
             --color-secondary: rgba(80, 93, 168, 0.1);
-            /* 10% do primary */
 
             --color-border: #ccd0d9;
-            /* Ajustado para combinar com o bg #E4E7EF */
             --color-btn-primary-text: #ffffff;
 
             --color-error: #d32f2f;
@@ -186,6 +183,26 @@
             .btn {
                 width: auto;
             }
+        }
+
+        /* Input Group para Busca CNES */
+        .input-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .input-group .form-control {
+            flex: 1;
+        }
+
+        /* Botão de busca menor */
+        .btn-search {
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            height: fit-content;
+            align-self: center;
         }
 
         /* Estilos Específicos da Página de Check */
@@ -779,7 +796,6 @@
                     e requisitos internacionais de qualidade.</p>
 
                 <div class="actions">
-                    <!-- Alterado para direcionar para a tela de pré-checagem -->
                     <button class="btn btn--primary btn-start" onclick="goToStep('pre-check')">
                         Começar Avaliação <i class="fas fa-clipboard-check"></i>
                     </button>
@@ -812,7 +828,6 @@
     </section>
 
     <!-- Páginas do Formulário -->
-    <!-- As páginas serão geradas dinamicamente pelo JS, mas precisamos dos containers -->
     <section id="page-1" class="page"></section>
     <section id="page-2" class="page"></section>
     <section id="page-3" class="page"></section>
@@ -821,7 +836,7 @@
     <section id="page-6" class="page"></section>
     <section id="page-7" class="page"></section>
     <section id="page-8" class="page"></section>
-    <section id="page-9" class="page"></section> <!-- Adicionada margem extra -->
+    <section id="page-9" class="page"></section>
 
     <!-- Página de Próximos Passos -->
     <section id="page-next-steps" class="page">
@@ -863,9 +878,10 @@
     </section>
 
     <script>
-        // --- DEFINIÇÃO DAS ESTRUTURAS DE PERGUNTAS ---
+        // --- CONFIGURAÇÃO ---
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV0FjWpXQFSJmOIARGrqJdNIHyOqTiFpG-ASGRSLF6iKkFGqk5T_UagnFteQvgZl8k5w/exec';
 
-        // 1. Cadastro Curto (Para quem já respondeu o Q1)
+        // --- ESTRUTURAS ---
         const registrationShort = {
             title: "Identificação Simplificada",
             sections: [
@@ -873,28 +889,25 @@
                     id: "s_reg_short",
                     title: "Confirmação de Dados",
                     questions: [
+                        { id: "s1_cnes", label: "CNES", type: "cnes_search", required: true, grid: "full", placeholder: "Digite o CNES para buscar dados..." },
                         { id: "s1_nome_inst", label: "Nome da Instituição", type: "text", required: true, grid: "full" },
-                        { id: "s1_cnpj", label: "CNPJ", type: "text", required: true, grid: "full" },
-                        // Adicionado campo CNES
-                        { id: "s1_cnes", label: "CNES", type: "text", required: true, grid: "full" }
+                        { id: "s1_cnpj", label: "CNPJ", type: "text", required: true, grid: "full" }
                     ]
                 }
             ]
         };
 
-        // 2. Cadastro Longo (Para quem NÃO respondeu o Q1 - Trazido do original)
         const registrationLong = {
             title: "Cadastro Institucional Completo",
             sections: [
                 {
                     id: "s1_full",
                     title: "Identificação Institucional",
-                    // Adicionado convite para o questionário 1
                     description: "Caso ainda não tenha participado do primeiro questionário de interesse, convidamos a conhecê-lo: <a href='https://pesquisaclinica.ekantikasaude.com.br/' target='_blank' style='color: var(--color-primary); text-decoration: underline; font-weight: bold;'>Clique aqui para participar</a>.",
                     questions: [
+                        { id: "s1_cnes", label: "CNES (Preenchimento Automático)", type: "cnes_search", required: false, grid: "full", placeholder: "Digite o CNES para buscar dados..." },
                         { id: "s1_nome_inst", label: "Nome da Instituição", type: "text", required: true, grid: "full" },
                         { id: "s1_cnpj", label: "CNPJ", type: "text", required: true, grid: "full" },
-                        { id: "s1_CNES", label: "CNES", type: "text", required: false, grid: "full" },
                         { id: "s1_endereco_rua", label: "Rua/Avenida", type: "text", required: true, grid: "full" },
                         { id: "s1_endereco_num", label: "Número", type: "text", required: true },
                         { id: "s1_endereco_comp", label: "Complemento", type: "text" },
@@ -925,7 +938,6 @@
             ]
         };
 
-        // 3. Perguntas de Infraestrutura (Comum a todos)
         const infrastructureQuestions = [
             {
                 title: "Instalações Físicas e Fluxo",
@@ -1021,7 +1033,6 @@
                     {
                         id: "s_infra_8",
                         title: "Capacidade da Equipe (FTEs)",
-                        // Adicionada a descrição explicativa sobre FTEs
                         description: "<strong>O que é FTE?</strong><br>FTE (<i>Full-Time Equivalent</i>) ou Equivalente de Tempo Integral é uma unidade que mede a carga horária da equipe.<br>• <strong>1.0 FTE</strong> = Profissional com dedicação integral (ex: 40h ou 44h semanais).<br>• <strong>0.5 FTE</strong> = Profissional com meia dedicação (ex: 20h semanais).<br>Por favor, indique a soma dos FTEs disponíveis para a pesquisa.",
                         questions: [
                             { id: "s8_fte_pi", label: "FTE - Pesquisador Principal (PI)", type: "number", required: true, placeholder: "0.0" },
@@ -1070,7 +1081,7 @@
 
         // --- LÓGICA DO FORMULÁRIO ---
         let currentStep = 'hero';
-        let questionnaireStructure = []; // Será montado dinamicamente
+        let questionnaireStructure = [];
         let totalSteps = 0;
         let formData = {};
 
@@ -1078,31 +1089,21 @@
             // A página inicial (hero) já é renderizada estaticamente
         });
 
-        // Função para configurar o questionário baseado na escolha do usuário
         function setupRegistration(isShort) {
-            // Monta a estrutura: Cadastro (Curto ou Longo) + Infraestrutura
             if (isShort) {
                 questionnaireStructure = [registrationShort, ...infrastructureQuestions];
             } else {
                 questionnaireStructure = [registrationLong, ...infrastructureQuestions];
             }
-
             totalSteps = questionnaireStructure.length;
-
-            // Vai para a primeira etapa (que agora é o cadastro adequado)
             goToStep(1);
         }
 
         function renderStep(step) {
             const pageData = questionnaireStructure[step - 1];
             const container = document.getElementById(`page-${step}`);
-            // Se o container não existir (porque mudamos dinamicamente o número de passos), tenta criar ou usa um genérico
-            // Como criamos até page-9 no HTML, deve cobrir. Se precisar de mais, o script deveria criar dinamicamente, mas vamos assumir que 9 é suficiente.
 
-            if (!container) {
-                console.error(`Container page-${step} não encontrado.`);
-                return;
-            }
+            if (!container) return;
 
             let content = `
                 <div class="container">
@@ -1146,11 +1147,22 @@
             questionHtml += `<label class="form-label">${q.label} ${requiredStar}</label>`;
 
             switch (q.type) {
+                case 'cnes_search':
+                    questionHtml += `
+                        <div class="input-group">
+                            <input type="text" id="${q.id}" name="${q.id}" class="form-control" placeholder="${q.placeholder || ''}" ${q.required ? 'required' : ''}>
+                            <button type="button" class="btn btn--primary btn-search" onclick="fetchCNESData('${q.id}')">
+                                <i class="fas fa-search"></i> Buscar
+                            </button>
+                        </div>
+                        <div id="${q.id}-error" style="color: var(--color-error); font-size: 0.85rem; margin-top: 5px; display: none;"></div>
+                    `;
+                    break;
                 case 'text':
                 case 'email':
                 case 'tel':
                 case 'date':
-                case 'number': // Adicionado suporte a number
+                case 'number':
                     questionHtml += `<input type="${q.type}" id="${q.id}" name="${q.id}" class="form-control" ${q.placeholder ? `placeholder="${q.placeholder}"` : ''} ${q.required ? 'required' : ''} ${q.type === 'number' ? 'step="0.1" min="0"' : ''}>`;
                     break;
                 case 'textarea':
@@ -1197,20 +1209,124 @@
             return questionHtml;
         }
 
+        // --- LÓGICA DE BUSCA CNES ---
+        function fetchCNESData(inputId) {
+            const cnesInput = document.getElementById(inputId);
+            const errorDiv = document.getElementById(`${inputId}-error`);
+            const searchBtn = cnesInput.nextElementSibling;
+            const originalBtnContent = searchBtn.innerHTML;
+            const cnesValue = cnesInput.value.trim();
+
+            if (!cnesValue) {
+                errorDiv.textContent = "Por favor, digite um CNES válido.";
+                errorDiv.style.display = "block";
+                return;
+            }
+
+            errorDiv.style.display = "none";
+            searchBtn.disabled = true;
+            searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Buscando...';
+
+            const searchUrl = `${SCRIPT_URL}?action=searchCNES&cnes=${encodeURIComponent(cnesValue)}`;
+
+            fetch(searchUrl)
+                .then(response => response.json())
+                .then(data => {
+                    searchBtn.disabled = false;
+                    searchBtn.innerHTML = originalBtnContent;
+
+                    if (data.result === 'success') {
+                        populateForm(data.data);
+                        showNotification("Dados encontrados e preenchidos!", "success");
+                    } else if (data.result === 'notFound') {
+                        showNotification("CNES não encontrado na base de dados.", "error");
+                    } else {
+                        showNotification("Erro na busca: " + (data.message || "Desconhecido"), "error");
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro na busca:", error);
+                    searchBtn.disabled = false;
+                    searchBtn.innerHTML = originalBtnContent;
+                    showNotification("Erro de conexão ao buscar dados.", "error");
+                });
+        }
+
+        function populateForm(data) {
+            const mappings = {
+                'NOME_ESTABELECIMENTO': 's1_nome_inst',
+                'NO_LOGRADOURO': 's1_endereco_rua',
+                'NU_ENDERECO': 's1_endereco_num',
+                'NO_COMPLEMENTO': 's1_endereco_comp',
+                'NO_BAIRRO': 's1_endereco_bairro',
+                'MUNICIPIO': 's1_endereco_cidade',
+                'UF': 's1_endereco_estado',
+                'CO_CEP': 's1_endereco_cep',
+                // 'NO_EMAIL': 's1_resp_email', // Manual
+                'NU_TELEFONE': 's1_resp_tel'
+            };
+
+            for (const [key, fieldId] of Object.entries(mappings)) {
+                if (data[key]) {
+                    const field = document.getElementById(fieldId);
+                    if (field) field.value = data[key];
+                }
+            }
+
+            // Lógica Especial: Leitos (Radio)
+            if (data['LEITOS_EXISTENTES']) {
+                const leitos = parseInt(data['LEITOS_EXISTENTES'], 10);
+                let leitosOption = "";
+                if (leitos <= 50) leitosOption = "Até 50 leitos";
+                else if (leitos <= 100) leitosOption = "51 a 100 leitos";
+                else if (leitos <= 200) leitosOption = "101 a 200 leitos";
+                else if (leitos <= 300) leitosOption = "201 a 300 leitos";
+                else leitosOption = "Mais de 300 leitos";
+
+                checkRadioOption('s2_leitos', leitosOption);
+            }
+
+            // Lógica Especial: Natureza Jurídica (Radio) - AJUSTADA
+            if (data['DESC_NATUREZA_JURIDICA']) {
+                const desc = data['DESC_NATUREZA_JURIDICA'].toUpperCase().trim();
+                let naturezaOption = "";
+
+                // Mapeamento exato conforme solicitado
+                if (desc === "HOSPITAL_FILANTRÓPICO" || desc === "HOSPITAL_FILANTROPICO") {
+                    naturezaOption = "Filantrópica";
+                } else if (desc === "HOSPITAL_PÚBLICO" || desc === "HOSPITAL_PUBLICO") {
+                    naturezaOption = "Pública";
+                } else if (desc === "HOSPITAL_PRIVADO") {
+                    naturezaOption = "Privada com fins lucrativos";
+                }
+
+                if (naturezaOption) checkRadioOption('s2_natureza', naturezaOption);
+            }
+        }
+
+        function checkRadioOption(name, value) {
+            const radios = document.querySelectorAll(`input[name="${name}"]`);
+            radios.forEach(radio => {
+                if (radio.value === value) radio.checked = true;
+            });
+        }
+
+        function checkCheckboxOption(name, value) {
+            const checkboxes = document.querySelectorAll(`input[name="${name}"]`);
+            checkboxes.forEach(cb => {
+                if (cb.value === value) cb.checked = true;
+            });
+        }
+
         function goToStep(stepId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             const targetPage = document.getElementById(`page-${stepId}`);
 
             if (targetPage) {
                 currentStep = stepId;
-
-                // Se for um passo numérico (questões), renderiza
                 if (typeof stepId === 'number') {
-                    // Limpa conteúdo anterior para forçar re-render (útil se mudou de curto pra longo)
-                    // Mas para manter estado, melhor só renderizar se estiver vazio OU se precisarmos atualizar a barra de progresso
                     renderStep(stepId);
                 }
-
                 targetPage.classList.add('active');
                 window.scrollTo(0, 0);
             }
@@ -1239,6 +1355,7 @@
                     const element = form.querySelector(`[data-question-id="${q.id}"]`);
 
                     switch (q.type) {
+                        case 'cnes_search': // Tratado como text para validação
                         case 'text':
                         case 'email':
                         case 'tel':
@@ -1308,6 +1425,7 @@
                 section.questions.forEach(q => {
                     let value;
                     switch (q.type) {
+                        case 'cnes_search':
                         case 'text':
                         case 'email':
                         case 'tel':
@@ -1353,6 +1471,7 @@
                     if (value === undefined) return;
 
                     switch (q.type) {
+                        case 'cnes_search':
                         case 'text':
                         case 'email':
                         case 'tel':
@@ -1480,22 +1599,18 @@
 
             console.log("Dados prontos para envio:", submissionData);
 
-            // URL INTEGRADA CORRETAMENTE
-            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV0FjWpXQFSJmOIARGrqJdNIHyOqTiFpG-ASGRSLF6iKkFGqk5T_UagnFteQvgZl8k5w/exec';
-
             const submitButton = document.querySelector(`#form-step-${totalSteps} .btn-next`);
             submitButton.disabled = true;
             submitButton.innerHTML = 'Enviando... <i class="fas fa-spinner fa-spin"></i>';
 
             fetch(SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors', // IMPORTANTE PARA EVITAR ERRO DE REDIRECIONAMENTO/CORS
+                mode: 'no-cors',
                 cache: 'no-cache',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // IMPORTANTE
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify(submissionData),
             })
                 .then(() => {
-                    // Sucesso "Opaque": Não podemos ler o JSON de resposta, mas se chegou aqui, não houve erro de rede.
                     showNotification('Diagnóstico enviado com sucesso!', 'success');
                     goToStep('next-steps');
                     submitButton.disabled = false;
@@ -1525,5 +1640,6 @@
 </body>
 
 </html>
+
 
 
