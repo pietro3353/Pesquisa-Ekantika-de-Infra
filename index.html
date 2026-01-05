@@ -787,14 +787,27 @@
         <div class="container container-narrow">
             <div class="invitation-card">
                 <h2>Avaliação de Maturidade Estrutural</h2>
-                <p><strong>Prezado(a) Gestor(a),</strong></p>
-                <p>Dando continuidade ao processo de estruturação da Rede Nacional de Pesquisa Clínica, esta segunda
-                    etapa foca em um diagnóstico detalhado da infraestrutura existente e potencial da sua instituição.
+                <p><strong>Prezados(as),</strong></p>
+                <p>Dando sequência ao projeto de criação da Rede Nacional de Pesquisa Clínica da CMB, encaminhamos o
+                    Questionário 2, destinado a aprofundar o levantamento da infraestrutura das instituições
+                    interessadas em participar deste projeto.</p>
+                <p>Essas informações orientarão as estratégias e ações da próxima fase, na qual serão estruturados os
+                    núcleos de pesquisa e oferecida capacitação às equipes, conforme as necessidades identificadas. Já
+                    estamos trabalhando nas fontes de financiamento para essa terceira etapa com a Indústria
+                    Farmacêutica e outros possíveis participantes desse financiamento.</p>
+                <p>Sua participação é fundamental: quanto mais instituições aderirem, mais robusta será a rede e maior a
+                    força de negociação coletiva com a indústria, o governo e operadoras de saúde. Como discutido na
+                    última reunião do Conselho da CMB, investir em Educação e Pesquisa fortalece cada hospital
+                    individualmente e a CMB como um todo, conferindo maior relevância e sustentabilidade às Santas Casas
+                    e filantrópicas.</p>
+                <p>A área de Pesquisa e Desenvolvimento traz uma força, reconhecimento e diferenciação que vão além
+                    daquela que acontece com base em volume de atendimento.</p>
+                <p>Por favor, responda ao questionário até o dia xx/xx/xxxx. Em caso de dúvidas, estamos à disposição.
                 </p>
-                <p>O objetivo é mapear a maturidade estrutural para a condução de estudos clínicos, segregando ativos
-                    assistenciais de ativos dedicados à pesquisa, em conformidade com a <strong>RDC nº 945/2024</strong>
-                    e requisitos internacionais de qualidade.</p>
-
+                <div class="signatures">
+                    <p>Atenciosamente,</p>
+                    <p>Nelson Teich</p>
+                </div>
                 <div class="actions">
                     <button class="btn btn--primary btn-start" onclick="goToStep('pre-check')">
                         Começar Avaliação <i class="fas fa-clipboard-check"></i>
@@ -948,7 +961,7 @@
                         questions: [
                             { id: "s1_modelo_fisico", label: "Qual o modelo de espaço físico disponível para a pesquisa na instituição?", type: "radio", required: true, grid: "full", options: ["Centro dedicado (área exclusiva e delimitada para pesquisa)", "Espaço compartilhado com fluxo definido (salas designadas em horários específicos)", "Sem espaço físico designado (uso de consultórios rotativos conforme disponibilidade)", "Em fase de projeto/construção"] },
                             { id: "s1_sala_espera", label: "O centro de pesquisa possui uma sala de espera específica e separada para os participantes?", type: "radio", required: true, grid: "full", options: ["Sim, exclusiva para participantes de pesquisa", "Sim, mas compartilhada com o fluxo assistencial do hospital", "Não, utiliza a recepção principal/geral do hospital"] },
-                            { id: "s1_instalacoes", label: "Quais das seguintes instalações de atendimento ao participante a instituição possui? (Marque todas as aplicáveis)", type: "checkbox", required: true, grid: "full", options: ["Consultórios médicos com isolamento acústico/visual", "Salas de exame físico equipadas (maca, escada, negatoscópio, etc.)", "Salas de procedimentos (coleta de exames, infusão/intervenção)", "Enfermarias/Leitos para observação (curta permanência)", "Leitos de internação para estudos de Fase I ou bioequivalência (longa permanência)"] },
+                            { id: "s1_instalacoes", label: "Quais das seguintes instalações de atendimento ao participante a instituição possui? (Marque todas as aplicáveis)", type: "checkbox", required: true, grid: "full", options: ["Consultórios médicos dedicados à pesquisa", "Consultórios médicos compartilhados com assistência", "Salas de infusão/procedimentos dedicadas à pesquisa", "Salas de infusão/procedimentos compartilhadas com assistência", "Salas de exame físico equipadas (maca, escada, negatoscópio, etc.)", "Enfermarias/Leitos para observação (curta permanência)", "Leitos de internação para estudos de Fase I ou bioequivalência (longa permanência)"] },
                             { id: "s1_areas_apoio", label: "Quais áreas de apoio administrativo e logístico estão disponíveis?", type: "checkbox", required: true, grid: "full", options: ["Sala de reunião para a equipe", "Área dedicada para monitores externos (espaço de trabalho com internet)", "Escritórios administrativos para coordenadores e data entry", "Copa/Refeitório e vestiários para a equipe", "Almoxarifado para kits de laboratório e materiais de consumo"] }
                         ]
                     },
@@ -1007,7 +1020,7 @@
                         id: "s_infra_6",
                         title: "Equipamentos Diagnósticos",
                         questions: [
-                            { id: "s6_diagnosticos", label: "Quais equipamentos diagnósticos estão disponíveis no hospital? (Marque todos)", type: "checkbox", required: true, grid: "full", options: ["Eletrocardiograma (ECG) digital", "Balança antropométrica e Estadiômetro", "Esfigmomanômetro e termômetros digitais", "Tomografia / Ressonância Magnética", "Densitometria Óssea"] }
+                            { id: "s6_diagnosticos", label: "Quais equipamentos diagnósticos estão disponíveis no hospital? (Marque todos)", type: "checkbox", required: true, grid: "full", options: ["Eletrocardiograma (ECG) digital", "Balança antropométrica e Estadiômetro", "Esfigmomanômetro e termômetros digitais", "Tomografia / Ressonância Magnética", "Densitometria Óssea", "PET Scan", "Cintilografia Óssea"] }
                         ]
                     }
                 ]
@@ -1035,11 +1048,11 @@
                         title: "Capacidade da Equipe (FTEs)",
                         description: "<strong>O que é FTE?</strong><br>FTE (<i>Full-Time Equivalent</i>) ou Equivalente de Tempo Integral é uma unidade que mede a carga horária da equipe.<br>• <strong>1.0 FTE</strong> = Profissional com dedicação integral (ex: 40h ou 44h semanais).<br>• <strong>0.5 FTE</strong> = Profissional com meia dedicação (ex: 20h semanais).<br>Por favor, indique a soma dos FTEs disponíveis para a pesquisa.",
                         questions: [
-                            { id: "s8_fte_pi", label: "FTE - Pesquisador Principal (PI)", type: "number", required: true, placeholder: "0.0" },
-                            { id: "s8_fte_coord", label: "FTE - Coordenador(es) de pesquisa", type: "number", required: true, placeholder: "0.0" },
-                            { id: "s8_fte_enf", label: "FTE - Enfermeiros de pesquisa", type: "number", required: true, placeholder: "0.0" },
-                            { id: "s8_fte_farm", label: "FTE - Farmacêutico(s) de pesquisa", type: "number", required: true, placeholder: "0.0" },
-                            { id: "s8_fte_tec", label: "FTE - Técnicos de laboratório", type: "number", required: true, placeholder: "0.0" },
+                            { id: "s8_fte_pi", label: "FTE - Pesquisador Principal (PI)", type: "number", required: false, placeholder: "0.0" },
+                            { id: "s8_fte_coord", label: "FTE - Coordenador(es) de pesquisa", type: "number", required: false, placeholder: "0.0" },
+                            { id: "s8_fte_enf", label: "FTE - Enfermeiros de pesquisa", type: "number", required: false, placeholder: "0.0" },
+                            { id: "s8_fte_farm", label: "FTE - Farmacêutico(s) de pesquisa", type: "number", required: false, placeholder: "0.0" },
+                            { id: "s8_fte_tec", label: "FTE - Técnicos de laboratório", type: "number", required: false, placeholder: "0.0" },
 
                             { id: "s8_cobertura_turnos", label: "Existe cobertura por turnos (manhã/tarde/noite/finais de semana) para procedimentos de estudo?", type: "radio", required: true, grid: "full", options: ["Sim, cobertura 24h/7d", "Sim, cobertura parcial (noite/finais de semana sob demanda)", "Não, apenas horário comercial (seg-sex)"] },
                             { id: "s8_horarios_especificos", label: "Especifique os horários disponíveis (se houver restrições):", type: "text", required: false, grid: "full" },
@@ -1360,7 +1373,6 @@
                         case 'email':
                         case 'tel':
                         case 'date':
-                        case 'number':
                         case 'textarea':
                             const input = form.querySelector(`#${q.id}`);
                             if (input && input.value.trim() !== '') {
@@ -1476,53 +1488,30 @@
                         case 'email':
                         case 'tel':
                         case 'date':
-                        case 'number':
                         case 'textarea':
                             form.querySelector(`#${q.id}`).value = value;
                             break;
                         case 'radio':
-                            // Tenta encontrar o rádio pelo valor exato
-                            let radio = form.querySelector(`input[name="${q.id}"][value="${value}"]`);
-                            // Se não achar, pode ser que seja uma opção "Outro" com texto customizado
-                            if (!radio && q.hasOther) {
-                                // Assume que é a última opção (Outro)
-                                const options = form.querySelectorAll(`input[name="${q.id}"]`);
-                                radio = options[options.length - 1];
-                                if (radio && (radio.value.toLowerCase().includes('outro') || radio.value.toLowerCase().includes('outra'))) {
-                                    // Separa o valor do texto customizado
-                                    const separatorIndex = value.indexOf(': ');
-                                    if (separatorIndex > -1) {
-                                        const customText = value.substring(separatorIndex + 2);
-                                        form.querySelector(`#${q.id}-other-text`).value = customText;
-                                    }
-                                }
-                            }
+                            const radio = form.querySelector(`input[name="${q.id}"][value="${value}"]`);
                             if (radio) radio.checked = true;
+                            if (q.hasOther && value.toLowerCase().includes('outro')) {
+                                const otherValue = formData[`${q.id}_outro`];
+                                if (otherValue) form.querySelector(`#${q.id}-other-text`).value = otherValue;
+                            }
                             break;
                         case 'checkbox':
                             if (Array.isArray(value)) {
                                 value.forEach(val => {
-                                    let checkbox = form.querySelector(`input[name="${q.id}"][value="${val}"]`);
-
-                                    // Lógica para recuperar checkboxes "Outro" com texto customizado
-                                    if (!checkbox && q.hasOther) {
-                                        const separatorIndex = val.indexOf(': ');
-                                        if (separatorIndex > -1) {
-                                            const originalOption = val.substring(0, separatorIndex); // A parte antes do ": " seria o value original? Nem sempre.
-                                            // Estratégia simplificada: procura o checkbox "Outro"
-                                            const options = form.querySelectorAll(`input[name="${q.id}"]`);
-                                            const otherCb = Array.from(options).find(opt => opt.value.toLowerCase().includes('outra') || opt.value.toLowerCase().includes('outros'));
-
-                                            if (otherCb) {
-                                                checkbox = otherCb;
-                                                const customText = val.substring(separatorIndex + 2);
-                                                form.querySelector(`#${q.id}-other-text`).value = customText;
-                                            }
-                                        }
-                                    }
-
+                                    const checkbox = form.querySelector(`input[name="${q.id}"][value="${val}"]`);
                                     if (checkbox) checkbox.checked = true;
                                 });
+                                if (q.hasOther) {
+                                    const otherCheckbox = value.find(v => v.toLowerCase().includes('outra') || v.toLowerCase().includes('outros'));
+                                    if (otherCheckbox) {
+                                        const otherValue = formData[`${q.id}_outro`];
+                                        if (otherValue) form.querySelector(`#${q.id}-other-text`).value = otherValue;
+                                    }
+                                }
                             }
                             break;
                     }
@@ -1597,8 +1586,7 @@
                 }
             }
 
-            console.log("Dados prontos para envio:", submissionData);
-
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV0FjWpXQFSJmOIARGrqJdNIHyOqTiFpG-ASGRSLF6iKkFGqk5T_UagnFteQvgZl8k5w/exec';
             const submitButton = document.querySelector(`#form-step-${totalSteps} .btn-next`);
             submitButton.disabled = true;
             submitButton.innerHTML = 'Enviando... <i class="fas fa-spinner fa-spin"></i>';
@@ -1611,15 +1599,15 @@
                 body: JSON.stringify(submissionData),
             })
                 .then(() => {
-                    showNotification('Diagnóstico enviado com sucesso!', 'success');
+                    showNotification('Respostas enviadas com sucesso!', 'success');
                     goToStep('next-steps');
                     submitButton.disabled = false;
                 })
                 .catch(error => {
-                    console.error('Erro:', error);
-                    showNotification(`Erro ao enviar: ${error.message}. Tente novamente.`, 'error');
+                    console.error('Erro ao enviar dados para o Google Sheet:', error);
+                    showNotification(`Erro ao enviar: ${error.message}`, 'error');
                     submitButton.disabled = false;
-                    submitButton.innerHTML = 'Enviar Diagnóstico <i class="fas fa-paper-plane"></i>';
+                    submitButton.innerHTML = 'Enviar Questionário <i class="fas fa-paper-plane"></i>';
                 });
         }
 
